@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:11:03 by truby             #+#    #+#             */
-/*   Updated: 2020/12/27 23:19:35 by truby            ###   ########.fr       */
+/*   Updated: 2020/12/28 18:38:48 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int					ft_str_type(t_struct *lst)
 	if (lst->width > i)
 	{
 		if (!(width = ft_calloc_char(lst->width - i, ' ')))
-			return (0);
+			return (-1);
 		ft_wr(i, lst, input, width);
 		free(width);
 		return (lst->width);

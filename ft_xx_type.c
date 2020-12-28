@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:09:52 by truby             #+#    #+#             */
-/*   Updated: 2020/12/27 23:20:18 by truby            ###   ########.fr       */
+/*   Updated: 2020/12/28 18:42:19 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int			ft_wdth(t_struct *lst, char *pre, char *hex, int k)
 	else
 		width_sp = ft_calloc_char((lst->width), ' ');
 	if (width_sp == NULL)
-		return (0);
+		return (-1);
 	if (hex[0] == '0' && lst->precision == 0)
 	{
 		write(1, width_sp, lst->width);
@@ -85,7 +85,7 @@ int					ft_xx_type(t_struct *lst)
 	i = va_arg(*(lst->ap), unsigned int);
 	k = ft_razr(i);
 	if (!(hex = (char *)malloc(sizeof(char) * k + 1)))
-		return (0);
+		return (-1);
 	if (lst->type == 'x')
 		hex = ft_hex(hex, i, k, 96);
 	else
@@ -93,7 +93,7 @@ int					ft_xx_type(t_struct *lst)
 	if (lst->precision >= k)
 	{
 		if (!(pre = ft_calloc_char((lst->precision - k), '0')))
-			return (0);
+			return (-1);
 		k = lst->precision;
 	}
 	if (lst->width >= k)

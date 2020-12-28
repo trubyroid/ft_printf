@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 16:14:36 by truby             #+#    #+#             */
-/*   Updated: 2020/12/23 01:57:26 by truby            ###   ########.fr       */
+/*   Updated: 2020/12/28 18:50:24 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char				*ft_parse_flag(char *str)
 {
 	char			*flags;
 	int				i;
-	char			*tf;
 
 	i = 0;
 	flags = "-0";
@@ -55,8 +54,7 @@ char				*ft_parse_flag(char *str)
 			if (ft_isdigit(str[i]) && str[i] != '0')
 				break ;
 		}
-		tf = substr(str, 0, i);
-		return (tf);
+		return (substr(str, 0, i));
 	}
 	return (NULL);
 }

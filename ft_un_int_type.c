@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:05:01 by truby             #+#    #+#             */
-/*   Updated: 2020/12/27 23:19:56 by truby            ###   ########.fr       */
+/*   Updated: 2020/12/28 18:39:40 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int				ft_wdth(t_struct *lst, unsigned int i, int k, char *pre)
 	else
 		width_sp = ft_calloc_char((lst->width), ' ');
 	if (width_sp == NULL)
-		return (0);
+		return (-1);
 	if (i == 0 && lst->precision == 0)
 	{
 		write(1, width_sp, lst->width);
@@ -92,7 +92,7 @@ int						ft_un_int_type(t_struct *lst)
 	if (lst->precision > k)
 	{
 		if (!(pre = ft_calloc_char((lst->precision - k), '0')))
-			return (0);
+			return (-1);
 		k = lst->precision;
 	}
 	if (lst->width >= k)
