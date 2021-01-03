@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 22:36:07 by truby             #+#    #+#             */
-/*   Updated: 2020/12/28 18:52:22 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 02:45:45 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static char			*ft_spec(int len, const char *s)
 
 static int			ft_prs(char *spec, t_struct *lst)
 {
+	if (lst->flag != NULL)
+		free(lst->flag);
 	lst->flag = ft_parse_flag(spec);
 	if (lst->flag == NULL && (spec[0] == '0' || spec[0] == '-'))
 		return (-1);
