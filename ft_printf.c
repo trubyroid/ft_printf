@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 21:49:01 by truby             #+#    #+#             */
-/*   Updated: 2020/12/27 23:19:11 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 22:32:03 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int				ft_printf(const char *str, ...)
 		return (-1);
 	lst->flag = NULL;
 	lst->ap = &ap;
-	i = ft_parser_var(str, lst);
-	if (lst->flag != NULL)
-		free(lst->flag);
+	i = ft_write_and_parse(str, lst);
 	free(lst);
 	va_end(ap);
 	return (i);

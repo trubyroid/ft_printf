@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:09:52 by truby             #+#    #+#             */
-/*   Updated: 2020/12/28 18:42:19 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 22:24:20 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static int			ft_out(t_struct *lst, int k, char *pre, char *hex)
 		if (lst->precision == 0)
 		{
 			if (hex[0] == '0')
+			{
+				free(hex);
 				return (0);
+			}
 		}
 		write(1, hex, ft_strlen(hex));
 	}
@@ -33,7 +36,7 @@ static int			ft_out(t_struct *lst, int k, char *pre, char *hex)
 	return (k);
 }
 
-static int			ft_wdth(t_struct *lst, char *pre, char *hex, int k)
+static char			*ft_calloc_width(t_struct *lst)
 {
 	char			*width_sp;
 
@@ -47,17 +50,29 @@ static int			ft_wdth(t_struct *lst, char *pre, char *hex, int k)
 	else
 		width_sp = ft_calloc_char((lst->width), ' ');
 	if (width_sp == NULL)
+		return (NULL);
+	return (width_sp);
+}
+
+static int			ft_wdth(t_struct *lst, char *pre, char *hex, int k)
+{
+	char			*width_sp;
+
+	if (!(width_sp = ft_calloc_width(lst)))
 		return (-1);
 	if (hex[0] == '0' && lst->precision == 0)
 	{
 		write(1, width_sp, lst->width);
-		return (lst->width);
+		free(hex);
 	}
-	if (ft_strchr(lst->flag, '-'))
-		ft_out(lst, k, pre, hex);
-	write(1, width_sp, lst->width - k);
-	if (!(ft_strchr(lst->flag, '-')))
-		ft_out(lst, k, pre, hex);
+	else
+	{
+		if (ft_strchr(lst->flag, '-'))
+			ft_out(lst, k, pre, hex);
+		write(1, width_sp, lst->width - k);
+		if (!(ft_strchr(lst->flag, '-')))
+			ft_out(lst, k, pre, hex);
+	}
 	free(width_sp);
 	return (lst->width);
 }
@@ -98,6 +113,5 @@ int					ft_xx_type(t_struct *lst)
 	}
 	if (lst->width >= k)
 		return (ft_wdth(lst, pre, hex, k));
-	k = ft_out(lst, k, pre, hex);
-	return (k);
+	return (ft_out(lst, k, pre, hex));
 }

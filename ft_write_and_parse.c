@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser_var.c                                    :+:      :+:    :+:   */
+/*   ft_write_and_parse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 22:36:07 by truby             #+#    #+#             */
-/*   Updated: 2021/01/04 02:45:45 by truby            ###   ########.fr       */
+/*   Created: 2021/01/04 22:33:27 by truby             #+#    #+#             */
+/*   Updated: 2021/01/04 22:42:37 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static char			*ft_spec(int len, const char *s)
+static char			*ft_spec_str(int len, const char *s)
 {
 	int				i;
 	char			*spec;
@@ -27,10 +27,10 @@ static char			*ft_spec(int len, const char *s)
 	return (spec);
 }
 
-static int			ft_prs(char *spec, t_struct *lst)
+static int			ft_parser(char *spec, t_struct *lst)
 {
-	if (lst->flag != NULL)
-		free(lst->flag);
+	int				len;
+
 	lst->flag = ft_parse_flag(spec);
 	if (lst->flag == NULL && (spec[0] == '0' || spec[0] == '-'))
 		return (-1);
@@ -39,10 +39,13 @@ static int			ft_prs(char *spec, t_struct *lst)
 	if (lst->width == -1 || lst->precision == -2)
 		return (-1);
 	lst->type = ft_parse_type(spec);
-	return (ft_processor(lst));
+	len = ft_processor(lst);
+	if (lst->flag != NULL)
+		free(lst->flag);
+	return (len);
 }
 
-static int			ft_parser(const char *str, t_struct *lst, int i, int len)
+static int			ft_writer(const char *str, t_struct *lst, int i, int len)
 {
 	int				lenspec;
 	char			*spec;
@@ -51,10 +54,10 @@ static int			ft_parser(const char *str, t_struct *lst, int i, int len)
 	{
 		if (str[i] == '%')
 		{
-			if (!(spec = ft_spec(i + 1, str)))
+			if (!(spec = ft_spec_str(i + 1, str)))
 				return (-1);
 			i = i + ft_strlen(spec);
-			lenspec = ft_prs(spec, lst);
+			lenspec = ft_parser(spec, lst);
 			if (lenspec < 0)
 				return (lenspec);
 			len = len + lenspec;
@@ -70,12 +73,12 @@ static int			ft_parser(const char *str, t_struct *lst, int i, int len)
 	return (len);
 }
 
-int					ft_parser_var(const char *str, t_struct *lst)
+int					ft_write_and_parse(const char *str, t_struct *lst)
 {
 	int				len;
 	int				i;
 
 	i = 0;
 	len = 0;
-	return (ft_parser(str, lst, i, len));
+	return (ft_writer(str, lst, i, len));
 }

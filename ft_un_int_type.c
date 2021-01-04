@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:05:01 by truby             #+#    #+#             */
-/*   Updated: 2020/12/28 18:39:40 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 20:36:17 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ static int				ft_wdth(t_struct *lst, unsigned int i, int k, char *pre)
 	if (width_sp == NULL)
 		return (-1);
 	if (i == 0 && lst->precision == 0)
-	{
 		write(1, width_sp, lst->width);
-		return (lst->width);
+	else
+	{
+		if (ft_strchr(lst->flag, '-'))
+			ft_out(lst, i, k, pre);
+		write(1, width_sp, lst->width - k);
+		if (!(ft_strchr(lst->flag, '-')))
+			ft_out(lst, i, k, pre);
 	}
-	if (ft_strchr(lst->flag, '-'))
-		ft_out(lst, i, k, pre);
-	write(1, width_sp, lst->width - k);
-	if (!(ft_strchr(lst->flag, '-')))
-		ft_out(lst, i, k, pre);
 	free(width_sp);
 	return (lst->width);
 }

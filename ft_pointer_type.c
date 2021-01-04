@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:06:37 by truby             #+#    #+#             */
-/*   Updated: 2020/12/28 18:36:15 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 20:57:00 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,20 @@ static int				ft_out(t_struct *lst, int i, char *result)
 	if (lst->width > i + 2)
 	{
 		if (!(width_sp = ft_calloc_char(lst->width, ' ')))
+		{
+			free(result);
 			return (0);
+		}
 	}
 	if (!ft_strchr(lst->flag, '-') && lst->width > i + 2)
-	{
 		write(1, width_sp, lst->width - (i + 2));
-		free(width_sp);
-	}
 	write(1, "0x", 2);
 	if (lst->precision == -1)
 		write(1, result, ft_strlen(result));
 	if (ft_strchr(lst->flag, '-') && lst->width > i + 2)
-	{
 		write(1, width_sp, lst->width - (i + 2));
+	if (lst->width > i + 2)
 		free(width_sp);
-	}
 	return (1);
 }
 

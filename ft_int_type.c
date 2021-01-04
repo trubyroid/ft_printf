@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:02:30 by truby             #+#    #+#             */
-/*   Updated: 2020/12/27 23:17:29 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 20:32:40 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int			ft_razr(int i)
 
 static int			ft_out(t_struct *lst, int k, int i, char *pre)
 {
-	int				g;
+	unsigned int	g;
 
 	g = i;
 	if (lst->precision == 0 && i == 0)
@@ -39,16 +39,16 @@ static int			ft_out(t_struct *lst, int k, int i, char *pre)
 	if (i < 0 && i > -2147483648)
 	{
 		write(1, "-", 1);
-		i = (-i);
+		g = (-i);
 	}
 	if (lst->precision > ft_razr(i))
 	{
 		write(1, pre, ft_strlen(pre));
-		ft_putnbr_fd(i, 1);
+		ft_putnbr_fd(g, 1);
 		free(pre);
 	}
 	else
-		ft_putnbr_fd(i, 1);
+		ft_putnbr_fd(g, 1);
 	if (g < 0 && lst->precision == k)
 		return (k + 1);
 	return (k);
@@ -92,10 +92,10 @@ static int			ft_wdth(t_struct *lst, char *pre, int i, int k)
 			i = (-i);
 		if (!(ft_strchr(lst->flag, '-')))
 			k = ft_out(lst, k, i, pre);
-		free(width_sp);
-		if (k > lst->width)
-			return (k);
 	}
+	free(width_sp);
+	if (k > lst->width)
+		return (k);
 	return (lst->width);
 }
 

@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 22:45:04 by truby             #+#    #+#             */
-/*   Updated: 2020/12/27 23:16:38 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/04 22:32:27 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef	struct	s_spec_list
 }				t_struct;
 
 int				ft_printf(const char *line, ...);
-int				ft_parser_var(const char *str, t_struct *lst);
+int				ft_write_and_parse(const char *str, t_struct *lst);
 char			*ft_parse_flag(char *str);
 int				ft_parse_width(char *str, t_struct *lst);
 int				ft_parse_precision(char *str, t_struct *lst);
