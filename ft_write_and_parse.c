@@ -6,7 +6,7 @@
 /*   By: truby <truby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 22:33:27 by truby             #+#    #+#             */
-/*   Updated: 2021/01/04 22:42:37 by truby            ###   ########.fr       */
+/*   Updated: 2021/01/10 20:19:40 by truby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int			ft_parser(char *spec, t_struct *lst)
 	lst->type = ft_parse_type(spec);
 	len = ft_processor(lst);
 	if (lst->flag != NULL)
+
+
 		free(lst->flag);
 	return (len);
 }

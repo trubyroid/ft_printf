@@ -6,7 +6,7 @@
 #    By: truby <truby@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 21:53:13 by truby             #+#    #+#              #
-#    Updated: 2021/01/04 22:32:44 by truby            ###   ########.fr        #
+#    Updated: 2021/02/09 04:19:27 by truby            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ HEADER = printf.h
 all: $(NAME)
 
 $(NAME): $(O_FILES)
-	make -C ./libft
-	ar -rcs $(NAME) $(O_FILES) ./libft/*.o
+	
+	ar -rcs $(NAME) $(O_FILES) ./libft/make -C ./libft*.o
 
 %.o: %.c $(HEADER)
 	gcc -Wall -Wextra -Werror -c $<
